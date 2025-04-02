@@ -1,51 +1,66 @@
 <!---
 {
-  "depends_on": [],
   "author": "Stephan Bökelmann",
-  "first_used": "2025-03-17",
-  "keywords": ["learning", "exercises", "education", "practice"]
+  "first_used": "2025-04-02",
+  "keywords": ["Functions", "Cardinality", "Datatypes", "Mengenlehre", "C Language"]
 }
 --->
 
-# Learning Through Exercises
+# Cardinality, Functions and Datatypes
 
 ## 1) Introduction
-Learning by doing is one of the most effective methods to acquire new knowledge and skills. Rather than passively consuming information, actively engaging in problem-solving fosters deeper understanding and long-term retention. By working through structured exercises, students can grasp complex concepts in a more intuitive and applicable way. This approach is particularly beneficial in technical fields like programming, mathematics, and engineering.
+> 🧮 Understanding the size of sets helps us reason about the behavior of functions in programming.
 
-### 1.1) Further Readings and Other Sources
-- [The Importance of Practice in Learning](https://www.sciencedirect.com/science/article/pii/S036013151300062X)
-- "The Art of Learning" by Josh Waitzkin
-- [How to Learn Effectively: 5 Key Strategies](https://www.edutopia.org/article/5-research-backed-learning-strategies)
+In mathematics, the **cardinality** (or **mächtigkeit**) of a set describes how many elements it contains:
+- `|{1,2,3}| = 3`
+- `|ℕ| = ℵ₀` (countably infinite)
+- `|ℝ| > ℵ₀` (uncountably infinite)
+
+In C, every **datatype** defines a set of possible values — and those sets are always **finite**.
+
+For example:
+- `char` uses 8 bits → `|char| = 2^8 = 256`
+- `int` uses 32 bits → `|int| = 2^32 = 4,294,967,296`
+- `bool` is conceptually just `|bool| = 2`
+
+This gives us a tool to reason about **functions**:
+```c
+int add(int a, int b);
+```
+is a function from:
+```
+int × int → int
+```
+with:
+- input space: `2^32 × 2^32 = 2^64`
+- output space: `2^32`
+
+This means: the function cannot be injective — different inputs may yield the same output.
+
+Remember: Every C [function](https://github.com/STEMgraph/0b6b3ce8-418e-4900-ae42-a6d068389a12) defines a mapping from the [Cartesian product](https://github.com/STEMgraph/e954e47f-3d9d-4707-bea3-1ef3105278f4) of its parameter types to its return type.
 
 ## 2) Tasks
-1. **Write a Summary**: Summarize the concept of "learning by doing" in 3-5 sentences.
-2. **Example Identification**: List three examples from your own experience where learning through exercises helped you understand a topic better.
-3. **Create an Exercise**: Design a simple exercise for a topic of your choice that someone else could use to practice.
-4. **Follow an Exercise**: Find an online tutorial that includes exercises and complete at least two of them.
-5. **Modify an Existing Exercise**: Take a basic problem from a textbook or online course and modify it to make it slightly more challenging.
-6. **Pair Learning**: Explain a concept to a partner and guide them through an exercise without giving direct answers.
-7. **Review Mistakes**: Look at an exercise you've previously completed incorrectly. Identify why the mistake happened and how to prevent it in the future.
-8. **Time Challenge**: Set a timer for 10 minutes and try to solve as many simple exercises as possible on a given topic.
-9. **Self-Assessment**: Create a checklist to evaluate your own performance in completing exercises effectively.
-10. **Reflect on Progress**: Write a short paragraph on how this structured approach to exercises has influenced your learning.
+1. **Count Values**: For the following types, compute the number of possible values:
+   - `uint8_t`
+   - `int16_t`
+   - `bool`
+   - `float` (estimate based on IEEE 754, not exact)
 
-<details>
-  <summary>Tip for Task 5</summary>
-  Try making small adjustments first, such as increasing the difficulty slightly or adding an extra constraint.
-</details>
+2. **Function Domains**: Write a function `bool is_zero(uint8_t x);` and describe the cardinality of its input- and output-sets.
+
+3. **Write a Surjective Function**: Write a function `bool parity(uint8_t x);` that maps even numbers to `0`, odd to `1`. Is this function surjective?
+
+4. **Write a Constant Function**: Write a function `int always_five(float x);` that ignores the input. Argue about its injectivity and surjectivity.
+
+5. **Collision Observation**: Write a function `uint8_t compress(uint32_t x);`. Try calling it with two different values.
 
 ## 3) Questions
-1. What are the main benefits of learning through exercises compared to passive learning?
-2. How do exercises improve long-term retention?
-3. Can you think of a subject where learning through exercises might be less effective? Why?
-4. What role does feedback play in learning through exercises?
-5. How can self-designed exercises improve understanding?
-6. Why is it beneficial to review past mistakes in exercises?
-7. How does explaining a concept to someone else reinforce your own understanding?
-8. What strategies can you use to stay motivated when practicing with exercises?
-9. How can timed challenges contribute to learning efficiency?
-10. How do exercises help bridge the gap between theory and practical application?
+1. What does it mean for a function to be injective, surjective, bijective?
+2. Can a function in C be truly bijective if the domain is larger than the codomain?
+3. Why do collisions matter in hashing?
+4. What’s the difference between a function that *ignores* its argument and one that *uses* it partially?
+5. How does knowing the cardinality of types help in optimizing or verifying code?
 
 ## 4) Advice
-Practice consistently and seek out diverse exercises that challenge different aspects of a topic. Combine exercises with reflection and feedback to maximize your learning efficiency. Don't hesitate to adapt exercises to fit your own needs and ensure that you're actively engaging with the material, rather than just going through the motions.
+Use `sizeof(type)` and `<stdint.h>` types to make reasoning about value ranges easier. When debugging unexpected results, ask yourself: *how many inputs exist, and how many outputs are possible?* This can lead directly to understanding bugs in conversions, hashing, or logic.
 

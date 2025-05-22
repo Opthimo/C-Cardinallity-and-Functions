@@ -41,12 +41,14 @@ Remember: Every C [function](https://github.com/STEMgraph/0b6b3ce8-418e-4900-ae4
 
 ## 2) Tasks
 1. **Count Values**: For the following types, compute the number of possible values:
-   - `uint8_t`
-   - `int16_t`
-   - `bool`
-   - `float` (estimate based on IEEE 754, not exact)
+   - `uint8_t`  - 2^8    = 255
+   - `int16_t`  - 2^16   = 65.536
+   - `bool`     - 2^1    = 2
+   - `float` (estimate based on IEEE 754, not exact) 2^32 - 4.294.967.296
 
 2. **Function Domains**: Write a function `bool is_zero(uint8_t x);` and describe the cardinality of its input- and output-sets.
+
+output 2^1 input 2^8
 
 3. **Write a Surjective Function**: Write a function `bool parity(uint8_t x);` that maps even numbers to `0`, odd to `1`. Is this function surjective?
 

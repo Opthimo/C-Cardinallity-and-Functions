@@ -58,10 +58,32 @@ output 2^1 input 2^8
 
 ## 3) Questions
 1. What does it mean for a function to be injective, surjective, bijective?
+
+Injective: different inputs→different outputs.
+Surjective: all output values reached. 
+Bijective: both properties.
+
 2. Can a function in C be truly bijective if the domain is larger than the codomain?
+
+if domain > codomain, function cannot be injective, thus not bijective.
+
 3. Why do collisions matter in hashing?
+
+Collisions break uniqueness, 
+cause performance loss, 
+require collision handling, 
+and destroy O(1) property.
+
 4. What’s the difference between a function that *ignores* its argument and one that *uses* it partially?
+
+Ersteres ist eine onstantfunktion.
+
 5. How does knowing the cardinality of types help in optimizing or verifying code?
+
+Helps with optimization (choosing smaller types), 
+verification (exhaustive testing), 
+bug detection (overflow prediction), 
+and memory efficiency.
 
 ## 4) Advice
 Use `sizeof(type)` and `<stdint.h>` types to make reasoning about value ranges easier. When debugging unexpected results, ask yourself: *how many inputs exist, and how many outputs are possible?* This can lead directly to understanding bugs in conversions, hashing, or logic.
